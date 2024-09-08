@@ -12,30 +12,29 @@ https://docs.github.com/ja/actions/writing-workflows/choosing-when-your-workflow
 
 ```mermaid
 stateDiagram-v2
-    PreDraft: drafted<br>pre-release
+    Draft: draft<br>release or pre-release
     PreRelease: pre-release
     Release: release
 
-    [*] --> PreDraft: none
+    [*] --> Draft: none
     [*] --> PreRelease: prereleased<br>created<br>published
     [*] --> Release: released<br>created<br>published
-    PreDraft --> PreRelease: publised
-    PreRelease --> Release: released<br>(unchecked "Set as a pre-release")
-    Release --> PreRelease: prereleased<br>(checked "Set as a pre-release")
+    Draft --> PreRelease: published
+    Draft --> Release: published
+    PreRelease --> Release: released<br>(uncheck "Set as a pre-release")
+    Release --> PreRelease: prereleased<br>(check "Set as a pre-release")
     PreRelease --> [*]: deleted
     Release --> [*]: deleted
 
     state PreRelease {
-        [*] --> [*]: edited<br>(edit description, title)
+        [*] --> [*]: edited<br>(edit description or title)
         [*] --> [*]: none<br>(change tag)
     }
-
     state Release {
-        [*] --> [*]: edited<br>(edit description, title)
+        [*] --> [*]: edited<br>(edit description or title)
         [*] --> [*]: none<br>(change tag)
         [*] --> [*]: edited<br>(check "Set as the latest release")
     }
-
 ```
 
 ### Latest release の変更について
