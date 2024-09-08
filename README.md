@@ -37,14 +37,22 @@ stateDiagram-v2
     }
 ```
 
-### Latest release の変更について
+> [!Warning]
+>
+> draft から release に変更する際には `released` はトリガーされない。 `pre-release` も同様。
 
-２つ以上の Release がある状態で、現在 `Latest Release` ではない方の Release の `Set as the latest release` にチェックして更新すると、 `release.edit` のワークフローがトリガーされる。
+> [!Note]
+>
+> ### Latest release の変更について
+> 
+> ２つ以上の Release がある状態で、現在 `Latest Release` ではない方の Release の `Set as the latest release` にチェックして更新すると、 `release.edit` のワークフローがトリガーされる。
+> 
+> **その際の `${{ github.event.action }}` は、これから `Latest` となる方のブランチ（タグ）になる。**
+> 
+> もともと `Latest` で、これからそうでなくなる方からはワークフローはトリガーされない。
 
-**その際の `${{ github.event.action }}` は、これから `Latest` となる方のブランチ（タグ）になる。**
-
-もともと `Latest` で、これからそうでなくなる方からはワークフローはトリガーされない。
-
-### unpublish について
-
-`release` には `unpublish` という Activity type (action) が定義されているが、 GitHub の UI 上の操作からは発生させる方法を見つけられなかった。
+> [!Note]
+> 
+> ### unpublish について
+> 
+> `release` には `unpublish` という Activity type (action) が定義されているが、 GitHub の UI 上の操作からは発生させる方法を見つけられなかった。
